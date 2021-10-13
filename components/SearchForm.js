@@ -23,7 +23,7 @@ const SearchForm = () => {
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
 			/>
-			<button className={styles.search__submit} type="submit">Search</button>
+			<button className="btn" type="submit">Search</button>
 		</form>
     );
 };

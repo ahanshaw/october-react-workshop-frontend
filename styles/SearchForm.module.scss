@@ -9,28 +9,8 @@
 		width: 100%;
 		height: 30px;
 		font-size: 16px;
+		margin-right: 10px;
 		border: 1px solid black;
 		border-radius: 0;
-	}
-
-	&__submit {
-		height: 30px;
-		line-height: 30px;
-		color: white;
-		margin-left: 10px;
-		padding: 0 10px;
-		background-color: black;
-		border: 1px solid black;
-		border-radius: 0;
-		text-shadow: none;
-		box-shadow: none;
-		appearance: none;
-		transition: color 0.3s ease, background-color 0.3s ease;
-
-		&:hover {
-			color: black;
-			background-color: white;
-			cursor: pointer;
-		}
 	}
 }

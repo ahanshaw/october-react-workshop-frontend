@@ -20,7 +20,7 @@ export default function search() {
 	}, [router.query]);
 
 	useEffect(() => {
-		pokemon.results.filter(character => character.name.toLowerCase() == query).map(filterCharacter => (
+		pokemon.results.filter(character => character.name.toLowerCase().includes(query)).map(filterCharacter => (
 			setResults(results => [...results, filterCharacter])
 		));
 	}, [query]);
@@ -36,6 +36,9 @@ export default function search() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 			<div className="wrapper">
+				{results.length > 0 && 
+					<p>{results.length} Pokémon found with &#8220;{query}.&#8221;</p>
+				}
 				{results &&
 					results.map((result, index) => (
 						<div key={index}>

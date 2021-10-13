@@ -38,7 +38,7 @@ export default function Home() {
 						<p key={index}>{character.name}</p>
 					)
 				})}
-				<button className={styles.homepage__btn} onClick={(e) => shufflePokemon(e)}>Shuffle Pokémon</button>
+				<button className="btn" onClick={(e) => shufflePokemon(e)}>Shuffle Pokémon</button>
             </div>
         </main>
     );
