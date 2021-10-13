@@ -50,8 +50,8 @@ Please use this repo as a starter for this project, and commit to a branch using
     - Individual Pokemon page
         - There's a lot of info you could display from the json, but at a minimum we want the name of the pokemon, a picture of the pokemon,  and the description
     - 404 page
-- Use [next link](https://nextjs.org/docs/api-reference/next/link) `<Link/>` component to link between pages, and the built-in [Next Image](https://nextjs.org/docs/api-reference/next/image) `<Image/>` component for images.  We might have backend devs us a CDN with this next month. 👿
-- When it makes sense, break complex bits of react into their own components (like maybe the search results cards.
+- Use [next link](https://nextjs.org/docs/api-reference/next/link) `<Link/>` component to link between pages, and the built-in [Next Image](https://nextjs.org/docs/api-reference/next/image) `<Image/>` component for images.  We might have backend devs us a CDN with this next month. 😈
+- When it makes sense, break complex bits of react into their own components (like maybe the search results cards).
 - Push up your repo to bitbucket when finished and...
 - Have fun!
 
