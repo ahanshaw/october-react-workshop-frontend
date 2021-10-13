@@ -37,7 +37,7 @@ export default function search() {
             </Head>
 			<div className="wrapper">
 				{results.length > 0 && 
-					<p>{results.length} Pokémon found with &#8220;{query}.&#8221;</p>
+					<p>{results.length} Pokémon found with &#8220;{query}&#8221; in the name.</p>
 				}
 				{results &&
 					results.map((result, index) => (

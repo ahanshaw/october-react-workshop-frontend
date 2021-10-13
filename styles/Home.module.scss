@@ -1,15 +1,11 @@
 .homepage {
-    min-height: 75vh; // eh, works for now
-}
+	min-height: 75vh; // eh, works for now
+	padding: 20px 0 40px 0;
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-}
-
-.card {
-    border-radius: 0.25rem;
-    box-shadow: 0px 2px 6px rgba(black, 0.25);
-    padding: 0.5rem 1rem;
+	&__cards {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-bottom: 20px;
+	}
 }

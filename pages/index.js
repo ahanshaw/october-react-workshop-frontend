@@ -4,6 +4,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
+import Card from "../components/Card";
+
 import styles from "../styles/Home.module.scss";
 
 import eevee from "../samples/eevee";
@@ -33,11 +35,13 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 			<div className="wrapper">
-				{pokemons.slice(0, 6).map((character, index) => {
-					return (
-						<p key={index}>{character.name}</p>
-					)
-				})}
+				<div className={styles.homepage__cards}>
+						{pokemons.slice(0, 6).map((character, index) => {
+						return (
+							<Card key={index} pokemon={character} />
+						)
+					})}
+				</div>
 				<button className="btn" onClick={(e) => shufflePokemon(e)}>Shuffle Pokémon</button>
             </div>
         </main>
