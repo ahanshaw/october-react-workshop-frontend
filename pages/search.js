@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+
 import styles from "../styles/Home.module.scss";
+
 import pokemon from "../samples/pokemon";
 
 export default function search() {
-    const [query, setQuery] = useState("");
+	const router = useRouter();
+	const [query, setQuery] = useState('');
+	const [results, setResults] = useState([]);
 
-    // This will fire once when the page is loaded for the first time
-    useEffect(() => {
-        // Let's set the query state to match the query url parameter that's passed from the homepage
-        const search = window.location.search;
-        const urlParams = new URLSearchParams(search);
-        const urlQuery = urlParams.get("query");
-        if (urlQuery && urlQuery !== "") {
-            setQuery(urlQuery);
-        }
-    }, []);
+	useEffect(() => {
+		setQuery(router.query.query);
+		setResults([]);
+	}, [router.query]);
 
-    // This will fire every time the 'query' state is changed
-    useEffect(() => {
-        console.log("query is: ", query);
-    }, [query]);
+	useEffect(() => {
+		pokemon.results.filter(character => character.name.toLowerCase() == query).map(filterCharacter => (
+			setResults(results => [...results, filterCharacter])
+		));
+	}, [query]);
 
     return (
         <main className={styles.homepage}>
@@ -34,41 +35,17 @@ export default function search() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="wrapper">
-                {/* Just a sample form, please feel free to delete or modify as needed for your implementation */}
-                {!query && <h1>Type below to begin search</h1>}
-                {query && <h1>Search</h1>}
-                <form action="">
-                    <input
-                        type="search"
-                        name="search"
-                        id="search"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                    {/* <button type="submit">Search!</button> */}
-                </form>
-                {query && (
-                    <div className="results">
-                        <h2>Searching for {query}</h2>
-                        <p>XXX Pokémon Found</p>
-                        <div className={styles.cards}>
-                            {pokemon.results.map((monster) => {
-                                if (monster.name.includes(query)) {
-                                    return (
-                                        <Link href="/single">
-                                            <a>
-                                                <div className={styles.card}>
-                                                    <h3>{monster.name}</h3>
-                                                </div>
-                                            </a>
-                                        </Link>
-                                    );
-                                }
-                            })}
-                        </div>
-                    </div>
-                )}
+			<div className="wrapper">
+				{results &&
+					results.map((result, index) => (
+						<div key={index}>
+							<p>{result.name}</p>
+						</div>
+					))
+				}
+				{results.length < 1 &&
+					<p>Sorry, no Pokémon by that name.</p>
+				}
             </div>
         </main>
     );
