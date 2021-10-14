@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 
 import Card from "../components/Card";
 
 import styles from "../styles/Home.module.scss";
 
-import eevee from "../samples/eevee";
 import pokemon from "../samples/pokemon";
 
 export default function Home() {

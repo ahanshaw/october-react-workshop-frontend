@@ -5,6 +5,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
+import Card from "../components/Card";
+
 import styles from "../styles/Home.module.scss";
 
 import pokemon from "../samples/pokemon";
@@ -36,19 +38,21 @@ export default function search() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 			<div className="container">
-				{results.length > 0 && 
-					<p>{results.length} Pokémon found with &#8220;{query}&#8221; in the name.</p>
-				}
-				{results &&
-					results.map((result, index) => (
-						<div key={index}>
-							<p>{result.name}</p>
-						</div>
-					))
-				}
-				{results.length < 1 &&
-					<p>Sorry, no Pokémon by that name.</p>
-				}
+				<div className={styles.homepage__cards}>
+					{results.length > 0 && 
+						<p>{results.length} Pokémon found with &#8220;{query}&#8221; in the name.</p>
+					}
+					{results &&
+						results.map((character, index) => {
+							return (
+								<Card key={index} pokemon={character} />
+							)
+						})
+					}
+					{results.length < 1 &&
+						<p>Sorry, no Pokémon by that name.</p>
+					}
+				</div>
             </div>
         </main>
     );

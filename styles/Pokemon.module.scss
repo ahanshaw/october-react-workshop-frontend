@@ -1,0 +1,142 @@
+@import "common/common";
+
+.pokemon {
+	position: relative;
+	margin: 0 -15px -15px -15px;
+	padding: 20px 10px 10px 10px;
+	background-color: $fire;
+	border-radius: 10px;
+
+	&__ball {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
+	.name {
+		@include font-size(32);
+		@include line-height(32, 36);
+		text-transform: capitalize;
+		text-align: center;
+		color: $white;
+		margin: 0 0 20px 0;
+	}
+
+	&__image {
+		text-align: center;
+	}
+
+	&__info {
+		text-align: center;
+		margin-top: -75px;
+		padding: 85px 15px 15px 15px;
+		background-color: $white;
+		border-radius: 10px;
+
+		h2 {
+			@include font-size(20);
+			@include line-height(20, 24);
+			color: $fire;
+			margin: 0 0 10px 0;
+		}
+
+		.desc {
+			@include font-size(14);
+			@include line-height(14, 18);
+			text-align: left;
+			margin-bottom: 20px;
+		}
+	}
+
+	&__category {
+		display: inline-block;
+		@include font-bold;
+		@include font-size(14);
+		@include line-height(14, 18);
+		letter-spacing: 0.5px;
+		color: $white;
+		margin: 0 0 20px 0;
+		padding: 5px 15px;
+		background-color: $fire;
+		border-radius: 10px;
+	}
+
+	&__detail {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px 0 20px 0;
+
+		&__item {
+			flex: 0 0 33.33%;
+			@include font-size(12);
+			@include line-height(12, 16);
+			text-align: center;
+
+			&:nth-of-type(2) {
+				border-right: 1px solid $border-gray;
+				border-left: 1px solid $border-gray;
+			}
+
+			h3 {
+				margin: 0 0 10px 0;
+			}
+
+			p {
+				margin: 0;
+
+				svg {
+					margin-right: 10px;
+					vertical-align: -2px;
+				}
+			}
+		}
+	}
+
+	&__stat {
+		display: flex;
+
+		&__head {
+			flex: 0 0 50px;
+			text-align: right;
+			border-right: 1px solid $border-gray;
+
+			h3 {
+				@include font-size(12);
+				@include line-height(12, 16);
+				margin: 5px 10px 5px 0;
+			}
+		}
+
+		&__number {
+			flex: 0 0 calc(100% - 50px);
+			display: flex;
+			align-items: center;
+			padding: 0;
+
+			.number {
+				flex: 0 0 40px;
+				@include font-size(12);
+				@include line-height(12, 16);
+				margin: 5px 0 5px 10px;
+				text-align: left;
+			}
+
+			.bar {
+				position: relative;
+				flex: 0 0 calc(100% - 60px);
+				height: 5px;
+				background-color: $border-gray;
+			}
+
+			.stat {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				height: 5px;
+				background-color: $fire;
+				transform: translateY(-50%);
+				z-index: 1;
+			}
+		}
+	}
+}

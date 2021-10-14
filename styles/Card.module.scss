@@ -1,6 +1,7 @@
 @import "common/common";
 
 .card {
+	display: block;
 	flex: 0 0 calc(50% - 24px);
 	text-align: center;
 	margin: 10px;

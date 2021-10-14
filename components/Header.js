@@ -11,7 +11,7 @@ const Header = () => {
 			<div className="container">
 				<Link href="/">
 					<a className={styles.header__title}>
-						<span  className={styles.header__logo}>
+						<span className={styles.header__logo}>
 							<Image src="/images/pokeball.png" alt="logo" width="24" height="24" />
 						</span>
 						Pokédex
