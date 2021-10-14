@@ -8,7 +8,9 @@ const Card = ({pokemon}) => {
 			<div className={styles.card__image}>
 				<Image src="/images/pokemon-placeholder.png" alt="placeholder image" width="200" height="200" />
 			</div>
-            <h2 className={styles.card__name}>{pokemon.name}</h2>
+			<div  className={styles.card__name}>
+				<h2>{pokemon.name}</h2>
+			</div>
         </div>
     );
 };

@@ -35,7 +35,7 @@ export default function search() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-			<div className="wrapper">
+			<div className="container">
 				{results.length > 0 && 
 					<p>{results.length} Pokémon found with &#8220;{query}&#8221; in the name.</p>
 				}

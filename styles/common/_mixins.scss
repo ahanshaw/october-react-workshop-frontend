@@ -1,0 +1,42 @@
+//fonts
+@mixin font-size($font-size) {
+	font-size: ($font-size / $base-font-size) * 1rem;
+}
+
+@mixin line-height($font-size, $leading) {
+	line-height: ($leading / $font-size);
+}
+
+//breakpoints
+@mixin tablet {
+	@media screen and (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin laptop {
+	@media screen and (min-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media screen and (min-width: 1440px) {
+		@content;
+	}
+}
+
+//misc
+@mixin button-reset {
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+	text-shadow: none;
+	box-shadow: none;
+	appearance: none;
+
+	&:hover {
+		cursor: pointer;
+	}
+}

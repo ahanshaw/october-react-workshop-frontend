@@ -1,11 +1,8 @@
 .homepage {
-	min-height: 75vh; // eh, works for now
-	padding: 20px 0 40px 0;
-
 	&__cards {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		flex-wrap: wrap;
-		margin-bottom: 20px;
+		margin: 0 -10px 20px -10px;
 	}
 }

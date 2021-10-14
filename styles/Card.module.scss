@@ -1,24 +1,40 @@
+@import "common/common";
+
 .card {
-	flex: 0 0 calc(50% - 5px);
+	flex: 0 0 calc(50% - 24px);
 	text-align: center;
-	margin-bottom: 10px;
-	padding: 10px 0 0 0;
-	background-color: var(--white);
-	border: 2px solid var(--blue);
+	margin: 10px;
+	border: 2px solid;
 	border-radius: 8px;
+	overflow: hidden;
+
+	@include tablet {
+		flex: 0 0 calc(33.33% - 24px);
+	}
 
 	&__image {
-		padding: 0 20px;
+		padding: 10px 20px;
+		background-color: $white;
 	}
 
 	&__name {
-		width: 100%;
-		font-size: 16px;
-		font-weight: 400;
-		text-transform: capitalize;
-		margin: 0;
 		padding: 10px;
-		color: var(--white);
-		background-color: var(--blue);
+
+		h2 {
+			@include font-reg;
+			@include font-size(16);
+			text-transform: capitalize;
+			color: $white;
+			margin: 0;
+		}
+	}
+}
+
+$colors: $grass, $psychic, $electric, $water, $ghost, $dark;
+
+@for $i from 1 through length($colors) {
+	.card:nth-child(#{length($colors)}n + #{$i}) {
+		background: nth($colors, $i);
+		border-color: nth($colors, $i);
 	}
 }

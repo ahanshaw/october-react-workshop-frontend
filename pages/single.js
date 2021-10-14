@@ -12,7 +12,7 @@ const single = () => {
                 <meta name="description" content="Hello World!" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="wrapper">
+            <div className="container">
                 <h1>It's {eevee.info.name}</h1>
                 <Image
                     src={

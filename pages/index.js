@@ -34,9 +34,9 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-			<div className="wrapper">
+			<div className="container">
 				<div className={styles.homepage__cards}>
-						{pokemons.slice(0, 6).map((character, index) => {
+					{pokemons.slice(0, 6).map((character, index) => {
 						return (
 							<Card key={index} pokemon={character} />
 						)
