@@ -5,7 +5,8 @@
 	flex: 0 0 calc(50% - 24px);
 	text-align: center;
 	margin: 10px;
-	border: 2px solid;
+	border-width: 2px;
+	border-style: solid;
 	border-radius: 8px;
 	overflow: hidden;
 
@@ -28,14 +29,5 @@
 			color: $white;
 			margin: 0;
 		}
-	}
-}
-
-$colors: $grass, $psychic, $electric, $water, $ghost, $dark;
-
-@for $i from 1 through length($colors) {
-	.card:nth-child(#{length($colors)}n + #{$i}) {
-		background: nth($colors, $i);
-		border-color: nth($colors, $i);
 	}
 }

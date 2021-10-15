@@ -82,3 +82,18 @@ a {
 	white-space: nowrap;
 	border-width: 0;
 }
+
+// colors
+
+$types: ("rock", $rock), ("ghost", $ghost), ("steel", $steel), ("water", $water),
+	("grass", $grass), ("psychic", $psychic), ("ice", $ice), ("dark", $dark),
+	("fairy", $fairy), ("normal", $normal), ("fighting", $fighting),
+	("flying", $flying), ("poison", $poison), ("ground", $ground), ("bug", $bug),
+	("fire", $fire), ("electric", $electric), ("dragon", $dragon);
+
+@each $type in $types {
+	.#{nth($type,1)} {
+		background-color: nth($type, 2);
+		border-color: nth($type, 2);
+	}
+}

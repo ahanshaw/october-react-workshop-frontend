@@ -15,18 +15,28 @@ export default function search() {
 	const router = useRouter();
 	const [query, setQuery] = useState('');
 	const [results, setResults] = useState([]);
+	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
+		setLoading(true);
 		setQuery(router.query.query);
 		setResults([]);
 	}, [router.query]);
 
 	useEffect(() => {
+		setLoading(false);
 		setResults([]);
 		pokemon.results.filter(character => character.name.toLowerCase().includes(query)).map(filterCharacter => (
 			setResults(results => [...results, filterCharacter])
 		));
 	}, [query]);
+
+    if (isLoading) {
+        return (
+            <>
+            </>
+        );
+	}
 
     return (
         <main className={styles.homepage}>
@@ -51,7 +61,7 @@ export default function search() {
 						})
 					}
 					{results.length < 1 &&
-						<p>Sorry, no Pokémon by that name.</p>
+						<p>Sorry, no Pokémon found with &#8220;{query}&#8221; in the name.</p>
 					}
 				</div>
             </div>
