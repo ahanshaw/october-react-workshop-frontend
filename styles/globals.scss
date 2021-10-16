@@ -83,17 +83,30 @@ a {
 	border-width: 0;
 }
 
-// colors
-
+// type colors
 $types: ("rock", $rock), ("ghost", $ghost), ("steel", $steel), ("water", $water),
 	("grass", $grass), ("psychic", $psychic), ("ice", $ice), ("dark", $dark),
 	("fairy", $fairy), ("normal", $normal), ("fighting", $fighting),
 	("flying", $flying), ("poison", $poison), ("ground", $ground), ("bug", $bug),
 	("fire", $fire), ("electric", $electric), ("dragon", $dragon);
 
+// type text
 @each $type in $types {
-	.#{nth($type,1)} {
+	.#{nth($type,1)}-text {
+		color: nth($type, 2);
+	}
+}
+
+// type background
+@each $type in $types {
+	.#{nth($type,1)}-bg {
 		background-color: nth($type, 2);
+	}
+}
+
+// type border
+@each $type in $types {
+	.#{nth($type,1)}-border {
 		border-color: nth($type, 2);
 	}
 }

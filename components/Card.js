@@ -9,7 +9,6 @@ const Card = ({ pokemon }) => {
 	const [pokemonColor, setPokemonColor] = useState('');
 	const [pokemonImage, setPokemonImage] = useState('');
 
-
 	useEffect(() => {
 		let mounted = true;
 
@@ -41,7 +40,7 @@ const Card = ({ pokemon }) => {
 
 	return (
 		<Link href={`/pokemon/${pokemon.name}`}>
-			<a className={`${styles.card} ${pokemonColor}`}>
+			<a className={`${styles.card} ${pokemonColor}-bg ${pokemonColor}-border`}>
 				<div className={styles.card__image}>
 					<Image src={pokemonImage} alt="placeholder image" width="200" height="200" />
 				</div>
