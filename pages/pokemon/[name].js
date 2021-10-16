@@ -8,44 +8,34 @@ import styles from "../../styles/Pokemon.module.scss";
 const Pokemon = () => {
 	const router = useRouter();
 	const { name } = router.query;
+	const [isLoading, setIsLoading] = useState(true);
 	const [pokemon, setPokemon] = useState('');
 	const [pokemonType, setPokemonType] = useState('');
-	const [pokemonImage, setPokemonImage] = useState('');
-	const [pokemonDesc, setPokemonDesc] = useState('');
 
 	useEffect(() => {
+		setIsLoading(true);
 		if (name) {
-			Promise.all([
-				fetch('https://pokeapi.co/api/v2/pokemon/' + name),
-				fetch('https://pokeapi.co/api/v2/pokemon-species/' + name)
-			])
-				.then(function (responses) {
-					return Promise.all(responses.map(function (response) {
-						return response.json();
-					}));
-				})
-				.then(function (data) {
-					setPokemon(data[0]);
-					setPokemonType(data[0].types[0].type.name);
-					setPokemonImage(data[0].sprites.other.dream_world.front_default);
-					setPokemonDesc(data[1].flavor_text_entries[0].flavor_text);
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
+			fetch('https://pokeapi.co/api/v2/pokemon/' + name)
+			.then(function (resp) {
+				return resp.json();
+			})
+			.then(function (data) {
+				setPokemon(data);
+				setPokemonType(data.types[0].type.name);
+				setIsLoading(false);
+			})
+			.catch(function (err) {
+				console.log('something went wrong', err);
+			});
 		}
 	}, [name]);
 
-	console.log('stats ', pokemon.stats);
-
-	if (!pokemonImage || !pokemonDesc) {
+    if (isLoading){
         return (
-			<div>
-				<p>Looking for your Pokémon!</p>
-            </div>
+            <p>Finding your Pokemon.</p>
         );
-	}
-
+    }
+	
 	return (
 		<div className={`${styles.pokemon} ${pokemonType}-bg`}>
 			<div className={styles.pokemon__ball}>
@@ -58,7 +48,7 @@ const Pokemon = () => {
 			</div>
 			<h1 className={styles.name}>{pokemon.name}</h1>
 			<div className={styles.pokemon__image}>
-				<Image src={pokemonImage} alt={pokemon.name} width="200" height="200" />
+				<Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`} alt={pokemon.name} width="200" height="200" />
 			</div>
 			<div className={styles.pokemon__info}>
 				<p className={`${styles.pokemon__type} ${pokemonType}-bg`}>{pokemonType}</p>
@@ -81,15 +71,18 @@ const Pokemon = () => {
 					</div>
 					<div className={styles.pokemon__detail__item}>
 						<h3>Top Moves</h3>
-						<p>{pokemon.moves[0].move.name}, {pokemon.moves[1].move.name}</p>
+						{pokemon.moves.length > 0 &&
+							<p>{pokemon.moves[0].move.name}, {pokemon.moves[1].move.name}</p>
+						}
+						{pokemon.moves.length < 1 &&
+							<p>No moves.</p>
+						}
 					</div>
 				</div>
 
-				<p className={styles.desc}>{pokemonDesc}</p>
-
 				<h2 className={`${pokemonType}-text`}>Base Stats</h2>
 				{pokemon.stats.map((stat, index) => (
-					<div className={styles.pokemon__stat}>
+					<div key={index} className={styles.pokemon__stat}>
 						<div className={styles.pokemon__stat__head}>
 							<h3>{stat.stat.name}</h3>
 						</div>

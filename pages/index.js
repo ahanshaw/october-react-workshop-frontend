@@ -12,8 +12,7 @@ export default function Home() {
 	const [numberPokemon, setNumberPokemon] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const numberPerPage = 12;
-	const totalPages = Math.ceil(numberPokemon / numberPerPage);
-
+	const totalPages = Math.ceil(numberPokemon / numberPerPage) - 1;
 
 	useEffect(() => {
 		fetch('https://pokeapi.co/api/v2/pokemon?limit=' + numberPerPage + '&offset=' + numberPerPage * currentPage)

@@ -2,41 +2,23 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 
 import Card from "../components/Card";
 
 import styles from "../styles/Home.module.scss";
 
-import pokemon from "../samples/pokemon";
-
 export default function search() {
 	const router = useRouter();
-	const [query, setQuery] = useState('');
-	const [results, setResults] = useState([]);
-	const [isLoading, setLoading] = useState(true);
+	const { query } = router.query;
+	const [pokemon, setPokemon] = useState([]);
 
 	useEffect(() => {
-		setLoading(true);
-		setQuery(router.query.query);
-		setResults([]);
-	}, [router.query]);
-
-	useEffect(() => {
-		setLoading(false);
-		setResults([]);
-		pokemon.results.filter(character => character.name.toLowerCase().includes(query)).map(filterCharacter => (
-			setResults(results => [...results, filterCharacter])
-		));
+		fetch('https://pokeapi.co/api/v2/pokemon?limit=2000')
+			.then(response => response.json())
+			.then(data => {
+				setPokemon(data.results);
+			});
 	}, [query]);
-
-    if (isLoading) {
-        return (
-            <>
-            </>
-        );
-	}
 
     return (
         <main className={styles.homepage}>
@@ -49,20 +31,14 @@ export default function search() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 			<div className="container">
-				{results.length > 0 && 
-					<p>{results.length} Pokémon found with &#8220;{query}&#8221; in the name.</p>
-				}
 				<div className={styles.homepage__cards}>
-					{results &&
-						results.map((character, index) => {
+					{pokemon.map((monster, index) => {
+						if (monster.name.includes(query.toLowerCase())) {
 							return (
-								<Card key={index} pokemon={character} />
-							)
-						})
-					}
-					{results.length < 1 &&
-						<p>Sorry, no Pokémon found with &#8220;{query}&#8221; in the name.</p>
-					}
+								<Card key={index} pokemon={monster} />
+							);
+						}
+					})}
 				</div>
             </div>
         </main>

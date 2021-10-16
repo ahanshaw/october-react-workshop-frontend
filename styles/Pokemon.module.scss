@@ -34,7 +34,7 @@
 	&__info {
 		text-align: center;
 		margin-top: -65px;
-		padding: 85px 15px 15px 15px;
+		padding: 85px 20px 20px 20px;
 		background-color: $white;
 		border-radius: 10px;
 
@@ -48,7 +48,7 @@
 			@include font-size(14);
 			@include line-height(14, 18);
 			text-align: left;
-			margin: 40px 10px 20px 10px;
+			margin: 40px 0 20px 0;
 		}
 	}
 
@@ -136,6 +136,7 @@
 				flex: 0 0 calc(100% - 60px);
 				height: 5px;
 				background-color: $border-gray;
+				overflow: hidden;
 			}
 
 			.stat {
