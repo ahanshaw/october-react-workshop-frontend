@@ -29,8 +29,9 @@
 		padding: 10px;
 
 		h2 {
-			@include font-reg;
+			@include font-bold;
 			@include font-size(16);
+			letter-spacing: 0.75px;
 			text-transform: capitalize;
 			color: $white;
 			margin: 0;

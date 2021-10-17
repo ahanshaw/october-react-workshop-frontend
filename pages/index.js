@@ -6,7 +6,7 @@ import Card from "../components/Card";
 
 import styles from "../styles/Home.module.scss";
 
-function Home({ pokemon }) {
+const Home = ({ pokemon }) => {
 	const numPerPage = 12;
 	const totalPages = Math.ceil(897 / numPerPage);
 	const [pageNum, setPageNum] = useState(1);
@@ -28,9 +28,9 @@ function Home({ pokemon }) {
             </Head>
 			<div className="container">
 				<div className={styles.homepage__cards}>
-					{pokemon.slice(0, numPerPage * pageNum).map((character, index) => {
+					{pokemon.slice(0, numPerPage * pageNum).map((monster, index) => {
 						return (
-							<Card key={index} pokemon={character} />
+							<Card key={index} pokemon={monster} />
 						)
 					})}
 				</div>
