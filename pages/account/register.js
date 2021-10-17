@@ -5,6 +5,8 @@ import { database } from '../../services/firebase';
 import { auth, logout } from '../../services/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import styles from "../../styles/Account.module.scss";
+
 const AccountRegister = () => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -71,7 +73,7 @@ const AccountRegister = () => {
 	if (user) {
 		return (
 			<div>
-				<button className="dashboard__btn" onClick={logout}>
+				<button className="btn-gray" onClick={logout}>
 					Logout
 				</button>
 			</div>
@@ -80,13 +82,13 @@ const AccountRegister = () => {
 
 	return (
 		<div className="account">
+			<h1>Register</h1>
 			<form onSubmit={(e) => createUserWithEmailAndPassword(e, email, password)}>
 				<fieldset>
 					<label htmlFor="firstName">First Name</label>
 					<input
 						type="text"
 						id="firstName"
-						className="login__textBox"
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
 						placeholder="First Name"
@@ -97,7 +99,6 @@ const AccountRegister = () => {
 					<input
 						type="text"
 						id="lastName"
-						className="login__textBox"
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
 						placeholder="Last Name"
@@ -108,7 +109,6 @@ const AccountRegister = () => {
 					<input
 						type="email"
 						id="email"
-						className="login__textBox"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						placeholder="E-mail Address"
@@ -119,13 +119,12 @@ const AccountRegister = () => {
 					<input
 						type="password"
 						id="password"
-						className="login__textBox"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="Password"
 					/>
 				</fieldset>
-				<button className="login__btn">Create Account</button>
+				<button className="btn btn--gray">Create Account</button>
 				{userExists && !resetSent &&
 					<div>
 						<p>An account with that email address already exists. <Link to={`/account/login`}>Log in</Link> or <button onClick={(e) => sendPasswordResetEmail(e, email)}>reset your password</button>.</p>
@@ -138,9 +137,9 @@ const AccountRegister = () => {
 					<p className="error">{error}</p>
 				}
 			</form>
-			<p>
+			<p>Already have an account?&nbsp;
 				<Link href={`/account/login`}>
-					<a>Log in to your account.</a>
+					<a>Log in.</a>
 				</Link>
 			</p>
 		</div>

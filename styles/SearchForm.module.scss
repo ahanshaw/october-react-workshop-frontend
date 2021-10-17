@@ -8,16 +8,6 @@
 		margin: 10px 0 0 0;
 	}
 
-	&__input {
-		display: block;
-		width: 100%;
-		height: 30px;
-		@include font-size(16);
-		padding: 0 10px;
-		border: 2px solid var(--border-gray);
-		border-radius: 10px;
-	}
-
 	&__submit {
 		@include button-reset;
 		width: 20px;

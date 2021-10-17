@@ -35,7 +35,7 @@ const Home = ({ pokemon }) => {
 					})}
 				</div>
 				{pageNum < totalPages &&
-					<button className={styles.showmore} onClick={() => setPageNum(pageNum + 1)}>Show More</button>
+					<button className="btn btn--white" onClick={() => setPageNum(pageNum + 1)}>Show More</button>
 				}
             </div>
         </main>

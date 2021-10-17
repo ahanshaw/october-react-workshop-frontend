@@ -38,32 +38,33 @@ const AccountLogin = () => {
 
 	if (user) {
 		return (
-			<div>
-				<button onClick={logout}>
-					Logout
-				</button>
-			</div>
+			<p>You have successfully logged in!</p>
         );
     }
 
 	return (
 		<div className="account">
+			<h1>Log In</h1>
 			<form onSubmit={(e) => signInWithEmailAndPassword(e, email, password)}>
-				<input
-					type="text"
-					className="login__textBox"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					placeholder="E-mail Address"
-				/>
-				<input
-					type="password"
-					className="login__textBox"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Password"
-				/>
-				<button className="login__btn">Log In</button>
+				<fieldset>
+					<label htmlFor="email">Email Address</label>
+					<input
+						type="text"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						placeholder="E-mail Address"
+					/>
+				</fieldset>
+				<fieldset>
+					<label htmlFor="password">Password</label>
+					<input
+						type="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						placeholder="Password"
+					/>
+				</fieldset>
+				<button className="btn btn--gray">Log In</button>
 				{error && 
 					<p className="error">{error}</p>
 				}
