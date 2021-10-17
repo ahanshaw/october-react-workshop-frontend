@@ -1,45 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Head from "next/head";
 
 import Card from "../components/Card";
-import Pagination from "../components/Pagination";
 
 import styles from "../styles/Home.module.scss";
 
-export default function Home() {
-	const [pokemon, setPokemon] = useState([]);
-	const [numberPokemon, setNumberPokemon] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
-	const numberPerPage = 12;
-	const totalPages = Math.ceil(numberPokemon / numberPerPage) - 1;
+function Home({ pokemon }) {
+	const numPerPage = 12;
+	const totalPages = Math.ceil(897 / numPerPage);
+	const [pageNum, setPageNum] = useState(1);
 
-	useEffect(() => {
-		fetch('https://pokeapi.co/api/v2/pokemon?limit=' + numberPerPage + '&offset=' + numberPerPage * currentPage)
-		.then(response => response.json())
-		.then(data => {
-			setPokemon(data.results);
-			setNumberPokemon(data.count);
-		});
-	}, [currentPage]);
-
-	// pagination 
-	const firstPage = () => {
-		setCurrentPage(1);
+    if (!pokemon) {
+        return (
+            <div>
+                <p>Pokémon are loading!</p>
+            </div>
+        );
 	}
-
-	const lastPage = () => {
-		setCurrentPage(totalPages);
-	}
-
-	const nextPage = () => {
-		setCurrentPage(currentPage + 1);
-	}
-
-	const prevPage = () => {
-		setCurrentPage(currentPage - 1);
-	}
-
+	
 	return (
         <main className={styles.homepage}>
             <Head>
@@ -49,14 +28,24 @@ export default function Home() {
             </Head>
 			<div className="container">
 				<div className={styles.homepage__cards}>
-					{pokemon.map((character, index) => {
+					{pokemon.slice(0, numPerPage * pageNum).map((character, index) => {
 						return (
 							<Card key={index} pokemon={character} />
 						)
 					})}
 				</div>
-				{totalPages > 1 && <Pagination firstPage={firstPage} lastPage={lastPage} prevPage={prevPage} nextPage={nextPage} currentPage={currentPage} totalPages={totalPages} />}
+				{pageNum < totalPages &&
+					<button className={styles.showmore} onClick={() => setPageNum(pageNum + 1)}>Show More</button>
+				}
             </div>
         </main>
     );
 }
+
+Home.getInitialProps = async () => {
+	const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=897');
+	const json = await res.json();
+	return { pokemon: json.results };
+}
+
+export default Home;
