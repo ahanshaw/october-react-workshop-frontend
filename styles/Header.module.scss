@@ -4,16 +4,46 @@
 	padding: 0 0 20px 0;
 	z-index: 9999;
 
-	&__logo {
-		display: inline-block;
-		margin-right: 10px;
-		vertical-align: -4px;
-	}
+	&__nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
 
-	&__title {
-		display: inline-block;
-		@include font-bold;
-		@include font-size(24);
-		margin: 10px 0 0 0;
+		.logo {
+			display: inline-block;
+			margin-right: 10px;
+			vertical-align: -4px;
+		}
+
+		.title {
+			display: inline-block;
+			@include font-bold;
+			@include font-size(24);
+			margin: 10px 0 0 0;
+		}
+
+		.accountBtn {
+			@include button-reset;
+			@include font-size(14);
+			text-decoration: underline;
+			text-decoration-color: transparent;
+			transition: text-decoration-color 0.3s ease;
+
+			&:hover {
+				text-decoration-color: inherit;
+			}
+		}
+
+		.accountDivider {
+			@include font-size(14);
+			margin: 0 10px;
+		}
+
+		.account-svg {
+			display: block;
+			width: 22px;
+			height: auto;
+		}
 	}
 }
