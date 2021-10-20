@@ -1,6 +1,7 @@
 @import "common/common";
 
 .card {
+	position: relative;
 	display: block;
 	flex: 0 0 calc(50% - 24px);
 	text-align: center;
@@ -14,8 +15,38 @@
 		flex: 0 0 calc(33.33% - 24px);
 	}
 
+	&__favorite {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+
+		button {
+			@include button-reset;
+
+			&:hover {
+				svg {
+					filter: drop-shadow(1px 2px 1px rgba($black, 0.5));
+				}
+			}
+		}
+
+		.favorite {
+			svg {
+				fill: $black;
+			}
+		}
+
+		svg {
+			display: block;
+			width: 20px;
+			fill: $border-gray;
+			filter: drop-shadow(1px 2px 1px $white);
+			transition: filter 0.3s ease;
+		}
+	}
+
 	&__image {
-		padding: 10px 20px;
+		padding: 20px 20px 10px 20px;
 		background-color: $white;
 
 		svg {
@@ -29,12 +60,15 @@
 		padding: 10px;
 
 		h2 {
-			@include font-bold;
-			@include font-size(16);
-			letter-spacing: 0.75px;
-			text-transform: capitalize;
-			color: $white;
 			margin: 0;
+
+			a {
+				@include font-bold;
+				@include font-size(16);
+				letter-spacing: 0.75px;
+				text-transform: capitalize;
+				color: $white;
+			}
 		}
 	}
 }

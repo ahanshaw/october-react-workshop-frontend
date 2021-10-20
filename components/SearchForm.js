@@ -10,7 +10,7 @@ const SearchForm = () => {
     const searchClicky = (e) => {
 		e.preventDefault();
 		setQuery('');
-        router.push(`/search?query=${query}`);
+        router.push(`/?query=${query}`);
 	};
 	
 	return (
