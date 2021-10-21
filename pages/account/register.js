@@ -54,7 +54,8 @@ const AccountRegister = () => {
 			uid: user.uid,
 			firstName: firstName,
 			lastName: lastName,
-			email: user.email
+			email: user.email,
+			favorites: ''
 		}
 		addUser(reg);
 	}

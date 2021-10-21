@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { database } from '../services/firebase';
+//import { database } from '../services/firebase';
 import { auth } from '../services/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -9,12 +9,11 @@ import Image from 'next/image';
 
 import styles from "../styles/Card.module.scss";
 
-const Card = ({ pokemon }) => {
+const Card = ({ pokemon, parentCallback }) => {
 	const [user] = useAuthState(auth);
 	const [pokemonId, setPokemonId] = useState('');
 	const [pokemonColor, setPokemonColor] = useState('');
 	const [pokemonImage, setPokemonImage] = useState('');
-	const [favorites, setFavorites] = useState('');
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
@@ -40,6 +39,7 @@ const Card = ({ pokemon }) => {
         }
 	}, [pokemon]);
 
+/*
 	useEffect(() => {
 		database.ref('users').once('value', function (snapshot) {
 			snapshot.forEach(user => {
@@ -48,6 +48,7 @@ const Card = ({ pokemon }) => {
 			});
 		});
 	}, []);
+	*/
 
 	// favorites
 	/*
@@ -83,7 +84,10 @@ const Card = ({ pokemon }) => {
 		<div className={`${styles.card} ${pokemonColor}-bg ${pokemonColor}-border`}>
 			{user &&
 				<div className={styles.card__favorite}>
-					<button className={isFavorite ? `${styles.favorite}` : ''}>
+					<button className={isFavorite ? `${styles.favorite}` : ''} onClick={() => {
+						parentCallback({ id: pokemonId, favorite: !isFavorite });
+						setIsFavorite(!isFavorite)
+					}}>
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z" /></svg>
 					</button>
 				</div>

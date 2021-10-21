@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from 'next/router'
 
+import { database } from '../services/firebase';
+import { auth } from '../services/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 import Head from "next/head";
 
 import Card from "../components/Card";
@@ -10,12 +14,38 @@ import styles from "../styles/Home.module.scss";
 const Home = ({ pokemon }) => {
 	const router = useRouter();
 	const { query } = router.query;
+	const [user] = useAuthState(auth);
+	const [userInfo, setUserInfo] = useState('');
+	const [userId, setUserId] = useState('');
 	const [results, setResults] = useState([]);
 	const [resultsLength, setResultsLength] = useState('');
 	const [noResults, setNoResults] = useState(true);
 	const numPerPage = 12;
 	const totalPages = Math.ceil(resultsLength / numPerPage);
 	const [pageNum, setPageNum] = useState(1);
+	const [favorites, setFavorites] = useState([]);
+
+	useEffect(() => {
+		database.ref('users').once('value', function (snapshot) {
+			snapshot.forEach(user => {
+				setUserInfo(user.val());
+				if (user.val().favorites) {
+					setFavorites(user.val().favorites);
+				}
+			});
+		});
+	}, []);
+
+	const callback = useCallback((id) => {
+		setUserId(id.user);
+		console.log('id ', id.id);
+		if (id.favorite) {
+			setFavorites(favorites => [...favorites, id.id]);
+		}
+		else {
+			setFavorites(favorites => favorites.filter(favorite => favorite !== id.id));
+		}
+	}, []);
 
 	useEffect(() => {
 		setResults([]);
@@ -44,6 +74,16 @@ const Home = ({ pokemon }) => {
 		}
 	}, [results]);
 
+
+	useEffect(() => {
+		database.ref()
+		.child('/users/' + userInfo.uid)
+		.update({
+			favorites: favorites
+		})
+		.catch()
+	}, [favorites]);
+
     return (
         <main className={styles.homepage}>
             <Head>
@@ -67,7 +107,7 @@ const Home = ({ pokemon }) => {
 					<div className={styles.homepage__cards}>
 						{results.slice(0, numPerPage * pageNum).map((monster, index) => {
 							return (
-								<Card key={index} pokemon={monster} />
+								<Card key={index} pokemon={monster} parentCallback={callback} />
 							)
 						})}
 					</div>
