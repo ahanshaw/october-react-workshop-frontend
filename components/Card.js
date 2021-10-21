@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 import styles from "../styles/Card.module.scss";
 
-const Card = ({ pokemon, parentCallback }) => {
+const Card = ({ pokemon, favorites, parentCallback }) => {
 	const [user] = useAuthState(auth);
 	const [pokemonId, setPokemonId] = useState('');
 	const [pokemonColor, setPokemonColor] = useState('');
@@ -33,52 +33,20 @@ const Card = ({ pokemon, parentCallback }) => {
         .catch(function (err) {
 			console.log('something went wrong', err);
 		});
-
+		
         return function cleanup() {
             mounted = false
         }
-	}, [pokemon]);
-
-/*
-	useEffect(() => {
-		database.ref('users').once('value', function (snapshot) {
-			snapshot.forEach(user => {
-				console.log('db info ', user.val());
-				setFavorites(favorites => [...favorites, user.val()])
-			});
-		});
 	}, []);
-	*/
 
-	// favorites
-	/*
-	const toggleFavorites = (e) => {
-		e.preventDefault();
-		if (isFavorite) {
-			setIsFavorite(false);
-
-			database.ref('users')
-			.child(user.uid)
-			.remove({
-				favorites: pokemonId
-			})
-			.catch()			
+	useEffect(() => {
+		if (favorites.includes(pokemonId)) {
+			setIsFavorite(true);
 		}
 		else {
-			setIsFavorite(true);
-			setFavorites(favorites => [...favorites, user.val()])
-
-			database.ref('users')
-			.child(user.uid)
-			.set({
-				favorites: favorites
-			})
-			.catch()
+			setIsFavorite(false);
 		}
-	}
-	*/
-
-	//console.log('favorites ', favorites);
+	}, [favorites]);
 
 	return (
 		<div className={`${styles.card} ${pokemonColor}-bg ${pokemonColor}-border`}>
