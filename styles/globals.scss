@@ -71,6 +71,14 @@ a {
 	text-decoration: none;
 }
 
+.isfavorite {
+	fill: $medium-gray;
+}
+
+.notfavorite {
+	fill: $light-gray;
+}
+
 .sr-only {
 	position: absolute;
 	width: 1px;

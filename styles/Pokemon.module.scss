@@ -7,6 +7,12 @@
 	background-color: $fire;
 	border-radius: 10px;
 
+	&__favorite {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+	}
+
 	&__ball {
 		position: absolute;
 		top: 10px;

@@ -1,0 +1,6 @@
+@import "common/common";
+
+.favorite {
+	@include button-reset;
+	width: 15px;
+}

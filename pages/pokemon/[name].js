@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import Image from "next/image";
 
-import eevee from "../../samples/eevee";
+import Favorite from "../../components/Favorite";
 
 import styles from "../../styles/Pokemon.module.scss";
 
@@ -12,6 +12,7 @@ const Pokemon = () => {
 
 	return (
 		<div className={styles.pokemon}>
+			<span className={styles.pokemon__favorite}><Favorite /></span>
 			<div className={styles.pokemon__ball}>
 				<svg width="207" height="208" viewBox="0 0 207 208" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<g opacity="0.1">
